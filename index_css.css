@@ -1,0 +1,42 @@
+body{
+    background-color: lightblue;
+}
+h1{
+    background-color: black;
+    color: white;
+    text-align: center;
+    width: 100%;
+}
+div{
+    background-color: gray;
+}
+
+table{
+    height:auto;
+    width: 60%;
+}
+tr,td{
+    font-family:sans-serif;
+}
+
+#fname_error{
+    color: red;
+}
+#lname_error{
+    color: red;
+}
+#dob_error{
+    color: red;
+}
+#email_error{
+    color: red;
+}
+#password_error{
+    color: red;
+}
+#cpsw_error{
+    color: red;
+}
+
+
+
