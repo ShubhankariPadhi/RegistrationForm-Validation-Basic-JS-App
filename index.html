@@ -10,11 +10,11 @@
 <div align="center">
     <form name="RegForm" autocomplete="off" action="Disp_Html.html" onclick="return validation_function()" method="post" >
         <table align="center">
-            <tr><td>FirstName:</td><td><input type="text" id="fname_id" name="fname" onkeyup="firstname_validation()" ></td></tr>
+            <tr><td>FirstName:</td><td><input type="text" autocomplete="off" id="fname_id" name="fname" onkeyup="return firstname_validation()" ></td></tr>
             <tr><td></td><td id="fname_error"></td></tr>
             <tr><td>LastName:</td><td><input type="text"  id="lname_id" name="lname" onkeyup="lastname_validation()" ></td></tr>
             <tr><td></td><td id="lname_error"></td></tr>
-            <tr><td>DOB:</td><td><input type="date" name="dob" id="dob_id" ></td></tr>
+            <tr><td>DOB:</td><td><input type="text" name="dob" id="dob_id" onkeyup="dob_validation()" ></td></tr>
             <tr><td></td><td id="dob_error"></td></tr>
             <tr><td>Email:</td><td><input type="text" placeholder="abcd@gmail.com" name="email_id" id="emailId" onkeyup="email_validation()" ></td></tr>
             <tr><td></td><td id="email_error"></td></tr>

@@ -8,9 +8,10 @@ var Password=document.getElementById('pass');
 var ConfirmPassword =document.getElementById('cnfmpass');
 
 //creating pattern for every fields
-//var FirstName_pattern=/^[A-Za-z_]{2,30}$/;
-//var LastName_pattern=/^[A-Za-z_]{2,30}$/;
-//var dob_pattern=;
+var FirstName_pattern=/^[A-Za-z_]{2,30}$/;
+var LastName_pattern=/^[A-Za-z_]{2,30}$/;
+var dob_pattern=/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
+//^(0?[1-9]|[12][0-9]|[3][01])[\/-](0?[1-9]|[1][012])[\-][12]{1}\d{3}$/
 var email_pttern=/^[a-zA-Z0-9_.]{4,30}@[a-zA-Z]{2,7}[.]{1}[a-zA-Z.]{2,20}$/;
 var password_pttern=/^[A-Z]{1}[A-Za-z_0-9]{5,8}$/;
 //var ConfirmPassword_pattern=;
@@ -52,10 +53,6 @@ function validation_function() {
         firstname_validation();
         return false;
     }
-    else {
-
-        document.getElementById("fname_error").innerHTML = "";
-    }
 
 //lastName conditions
     if(LastName.value == "") {
@@ -64,20 +61,15 @@ function validation_function() {
         lastname_validation();
         return false;
     }
-    else
-    {
-        document.getElementById("lname_error").innerHTML="";
-    }
+
 
 
 //dob condition
     if (DateOfBirth.value == "") {
         //document.getElementById("dob_error").innerHTML = "Please enter your Date of birth.";
         DateOfBirth.focus();
+        dob_validation();
         return false;
-    }
-    else{
-        document.getElementById("dob_error").innerHTML="";
     }
 
 //email condition
@@ -88,9 +80,7 @@ function validation_function() {
         return false;
     }
 
-    else {
-        document.getElementById("email_error").innerHTML = "";
-    }
+
 
 //password condition
     if (Password.value == "" ) {
@@ -100,10 +90,6 @@ function validation_function() {
         return false;
     }
 
-    else {
-        document.getElementById("password_error").innerHTML = "";
-    }
-
 //confirmpassword condition
     if(ConfirmPassword.value == "" ){
         //document.getElementById("cpsw_error").innerHTML = "Please fill this box";
@@ -111,10 +97,7 @@ function validation_function() {
         cpsw_validation();
         return false;
     }
-    else{  document.getElementById("cpsw_error").innerHTML = "";
 
-
-    }
 
     return true;
 }
@@ -129,10 +112,19 @@ function firstname_validation(){
         FirstName.focus();
         return false;
     }
+    if(FirstName_pattern.test(FirstName.value)==false)
+    {
+        document.getElementById('fname_id').style.backgroundColor="red";
+        document.getElementById("fname_error").innerHTML = "Digits are not allowed";
+        FirstName.focus();
+        return false;
 
+    }
     else {
 
         document.getElementById('fname_id').style.backgroundColor="green";
+        document.getElementById('fname_error').innerHTML="";
+        return true;
     }
 }
 function lastname_validation(){
@@ -143,14 +135,38 @@ function lastname_validation(){
         document.getElementById("lname_error").innerHTML = "please enter your LastName, charachers must be in between 2 to 20";
         return false;
     }
+
+    if(LastName_pattern.test(LastName.value)==false){
+        LastName.focus();
+        document.getElementById('lname_id').style.backgroundColor="red";
+        document.getElementById("lname_error").innerHTML = "Digits are not allowed";
+        return false;
+    }
     else{
         document.getElementById('lname_id').style.backgroundColor="green";
+        document.getElementById("lname_error").innerHTML="";
+        return false;
     }
+}
+
+
+function  dob_validation() {
+    if(dob_pattern.test(DateOfBirth.value)==false){
+        DateOfBirth.focus();
+        document.getElementById('dob_id').style.backgroundColor="red";
+        document.getElementById('dob_error').innerHTML="please enter a valid date";
+    }
+else {
+        document.getElementById('dob_id').style.backgroundColor="green";
+        document.getElementById("dob_error").innerHTML = "";
+        return false;
+    }
+
 }
 
 function email_validation(){
     if(email_pttern.test(EmailId.value)==false ){
-        document.getElementById("email_error").innerHTML="please enter your emailid in the above format";
+        document.getElementById("email_error").innerHTML="please enter your emailid in this format you@gmail.com";
         document.getElementById('emailId').style.backgroundColor="red";
         EmailId.focus();
         return false;
@@ -158,11 +174,19 @@ function email_validation(){
     else
     {
         document.getElementById('emailId').style.backgroundColor="green";
+        document.getElementById("email_error").innerHTML = "";
+        return false;
     }
 }
 
 function password_validation(){
 
+    if(!Password.value.match(password_pttern)){
+        document.getElementById("password_error").innerHTML = "Please enter your password, Starting letter must be in capital";
+        document.getElementById('pass').style.backgroundColor="red";
+        Password.focus();
+        return false;
+    }
     if((Password.value.length<=5)||(Password.value.length>8))
     {
         document.getElementById("password_error").innerHTML = "enter your password, length must be in between 5 to 8";
@@ -170,14 +194,11 @@ function password_validation(){
         document.getElementById('pass').style.backgroundColor="red";
         return false;
     }
-    if(!Password.value.match(password_pttern)){
-        document.getElementById("password_error").innerHTML = "Starting letter must be in capital";
-        document.getElementById('pass').style.backgroundColor="red";
-        Password.focus();
-        return false;
-    }
+
     else{
         document.getElementById('pass').style.backgroundColor="green";
+        document.getElementById("password_error").innerHTML = "";
+        return false;
     }
 
 }
@@ -192,6 +213,9 @@ function cpsw_validation(){
     }
     else{
         document.getElementById('cnfmpass').style.backgroundColor="green";
+        document.getElementById("cpsw_error").innerHTML = "";
+        return false;
+
     }
 }
 
